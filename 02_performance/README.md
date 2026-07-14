@@ -14,9 +14,8 @@ Scripts para monitorar, diagnosticar e ajustar a performance do PostgreSQL.
 | `04_analyze_stats.sql` | Estatísticas detalhadas por tabela: INSERTs/DELETEs/UPDATEs por dia, HOT updates, autovacuum | PG 10 |
 | `05_table_bloat.sql` | Bloat de tabelas acima de 100MB com taxa de HOT update | PG 8.4 |
 | `06_bloat_index.sql` | Bloat de índices acima de 50MB — versão simplificada | PG 9.5 |
-| `07_bloat_table.sql` | Bloat de tabelas acima de 1GB com bloat acima de 25% | PG 8.4 |
-| `08_monitore_cpu.sql` | Função PL/Python para monitorar uso de CPU por processo PostgreSQL + script shell de coleta | PG 13+ (plpython3u) |
-| `09_identifica_vacuum_aggressive.sql` | Identifica tabelas próximas do limite de vacuum agressivo (transaction ID wraparound) | PG 9.4 |
+| `07_monitore_cpu.sql` | Função PL/Python para monitorar uso de CPU por processo PostgreSQL + script shell de coleta | PG 13+ (plpython3u) |
+| `08_identifica_vacuum_aggressive.sql` | Identifica tabelas próximas do limite de vacuum agressivo (transaction ID wraparound) | PG 9.4 |
 
 ---
 
@@ -26,10 +25,10 @@ Scripts para monitorar, diagnosticar e ajustar a performance do PostgreSQL.
 |----------|--------------------|
 | I/O alto no disco | `01` (checkpoints forçados) |
 | UPDATEs lentos / table bloat crescendo | `02` (fill_factor inadequado) |
-| Banco crescendo sem motivo | `05`, `07` (bloat de tabela) |
+| Banco crescendo sem motivo | `05` (bloat de tabela) |
 | Índices ocupando muito espaço | `06` (bloat de índice) |
-| CPU alta no servidor de banco | `08` |
-| Alerta de transaction ID wraparound | `09` |
+| CPU alta no servidor de banco | `07` |
+| Alerta de transaction ID wraparound | `08` |
 | Limpeza de schema | `03` (tabelas sem uso) |
 | Tuning de autovacuum por tabela | `04` |
 
@@ -37,6 +36,6 @@ Scripts para monitorar, diagnosticar e ajustar a performance do PostgreSQL.
 
 ## Observações
 
-- `08_monitore_cpu.sql` requer a extensão `plpython3u` e o pacote Python `psutil` instalados no servidor
-- `09_identifica_vacuum_aggressive.sql` tem um filtro de schema — ajuste conforme necessário
-- Os scripts de bloat (`05`, `06`, `07`) têm filtros de tamanho mínimo comentados — ajuste conforme o ambiente
+- `07_monitore_cpu.sql` requer a extensão `plpython3u` e o pacote Python `psutil` instalados no servidor
+- `08_identifica_vacuum_aggressive.sql` tem um filtro de schema — ajuste conforme necessário
+- Os scripts de bloat (`05`, `06`) têm filtros de tamanho mínimo comentados — ajuste conforme o ambiente
